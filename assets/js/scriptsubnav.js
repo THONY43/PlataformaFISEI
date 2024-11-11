@@ -3,7 +3,10 @@
     usuarios: `
       <li><a href="../Administrador/listUser.php">Ver lista de Usuarios</a></li>
       <li><a href="../Administrador/createUser.php">Crear nuevo Usuario</a></li>
+       <li><a href="../Administrador/matricularUser.php">Matricular Usuario</a></li>
       <li><a href="../Administrador/deleteUser.php">Eliminar Usuario</a></li>
+      
+       
     `,
     carreras: `
       <li><a href="#">Ver lista de carreras</a></li>
