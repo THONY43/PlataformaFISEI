@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                                 $results = obtenerEstudiantePorId($stid, $type);
 
-                                if (is_array($results)) {
+                                if (is_array($results)&& !empty($results)) {
                                     foreach ($results as $result) {
 
                                         if (strtolower($type) === "estudiante") {
@@ -167,9 +167,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <?php
                                         }
                                     }
-                                } else {
-
-
+                                } elseif (isset($results['query_result']) && !empty($results['query_result'])) {
+                                    $materias = $results['materias'];
+                                    $carreras = $results['carreras'];
+                                    $cursos = $results['cursos'];
                                     ?>
                                     <form class="form-horizontal" method="post">
 
