@@ -44,6 +44,49 @@ function verificarRol($rolRequerido)
     }
 }
 
+function buscarUsuario()
+{
+    global $con;
+    $sql = "SELECT tbl_usuarios.nombre, tbl_usuarios.apellido, tbl_usuarios.id_usuario,
+    tbl_usuarios.correo, tbl_usuarios.tipo_usuario, tbl_usuarios.created_at
+FROM tbl_usuarios";
+
+    $query = $con->prepare($sql);
+    $query->execute();
+    $results = $query->fetchAll(PDO::FETCH_OBJ);
+    return $results ?: [];
+}
+function buscarUsuario1($typeUser)
+{
+    global $con;
+
+    if (isset($typeUser) && $typeUser === "docente") {
+        $sql = "SELECT tbl_usuarios.nombre, tbl_usuarios.apellido, tbl_usuarios.id_usuario,
+                       tbl_usuarios.correo, tbl_usuarios.tipo_usuario, tbl_usuarios.created_at,
+                       tbl_profesores.cedula, tbl_profesores.id_profesor
+                FROM tbl_usuarios
+                JOIN tbl_profesores ON tbl_usuarios.id_usuario = tbl_profesores.id_profesor";
+
+        $query = $con->prepare($sql);
+        $query->execute();
+        $results = $query->fetchAll(PDO::FETCH_OBJ);
+        return $results ?: [];
+    } else if (isset($typeUser) && $typeUser === "estudiante") {
+        $sql = "SELECT tbl_usuarios.nombre, tbl_usuarios.apellido, tbl_usuarios.id_usuario,
+                       tbl_usuarios.correo, tbl_usuarios.tipo_usuario, tbl_usuarios.created_at,
+                       tbl_estudiantes.cedula, tbl_estudiantes.id_estudiante
+                FROM tbl_usuarios
+                JOIN tbl_estudiantes ON tbl_usuarios.id_usuario = tbl_estudiantes.id_estudiante";
+
+        $query = $con->prepare($sql);
+        $query->execute();
+        $results = $query->fetchAll(PDO::FETCH_OBJ);
+        return $results ?: [];
+    }
+
+
+    return [];
+}
 
 function obtenerEstudiantePorId($stid, $type)
 {

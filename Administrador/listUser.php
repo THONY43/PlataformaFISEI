@@ -60,14 +60,8 @@ $userName = $_SESSION['user_name'];
                             </thead>
                             <tbody>
                                 <?php
-                                $sql = "SELECT tbl_usuarios.nombre, tbl_usuarios.apellido,   tbl_usuarios.id_usuario,
-                             tbl_usuarios.correo, tbl_usuarios.tipo_usuario, tbl_usuarios.created_at 
-                            FROM tbl_usuarios";
-                                $query = $con->prepare($sql);
-                                $query->execute();
-                                $results = $query->fetchAll(PDO::FETCH_OBJ);
+                                 $results=buscarUsuario();
                                 $cnt = 1;
-                                if ($query->rowCount() > 0) {
                                     foreach ($results as $result) { ?>
                                         <tr>
                                             <td><?php echo htmlentities($cnt); ?></td>
@@ -88,7 +82,7 @@ $userName = $_SESSION['user_name'];
                                 <?php
                                         $cnt++;
                                     }
-                                }
+                                
                                 ?>
                             </tbody>
                         </table>
